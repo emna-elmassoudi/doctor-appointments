@@ -1,0 +1,141 @@
+/* Page shell */
+.page{ padding: 28px 0 60px; }
+.page__top{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap: 14px; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.page__title{ margin:0; font-size: 26px; font-weight: 900; }
+.toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+.stack{ display:grid; gap:12px; }
+
+/* Alerts */
+.alert{
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+}
+.alert--danger{
+  border-color: rgba(255,77,79,.35);
+  background: rgba(255,77,79,.06);
+  color: #b42318;
+}
+.alert--success{
+  border-color: rgba(34,197,94,.35);
+  background: rgba(34,197,94,.08);
+  color: #0f7a3a;
+}
+
+/* Badges for status */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--muted);
+}
+.pill--pending{ background: rgba(245,158,11,.10); border-color: rgba(245,158,11,.25); color:#8a5b00; }
+.pill--confirmed{ background: rgba(34,197,94,.10); border-color: rgba(34,197,94,.25); color:#0f7a3a; }
+.pill--cancelled{ background: rgba(255,77,79,.08); border-color: rgba(255,77,79,.20); color:#b42318; }
+
+/* List items */
+.item{
+  display:flex;
+  justify-content:space-between;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+.item__meta{ display:grid; gap:6px; color: var(--muted); }
+.item__meta b{ color: var(--text); }
+.item__actions{ display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap; }
+
+/* Filters grid */
+.filters{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+@media (max-width: 900px){
+  .filters{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px){
+  .filters{ grid-template-columns: 1fr; }
+}
+/* ===== Appointments pages UI ===== */
+.page{ padding: 28px 0 60px; }
+.page__top{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap: 14px; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.page__title{ margin:0; font-size: 26px; font-weight: 900; }
+
+.toolbar{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+.stack{ display:grid; gap:12px; }
+
+.alert{
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+}
+.alert--danger{
+  border-color: rgba(255,77,79,.35);
+  background: rgba(255,77,79,.06);
+  color: #b42318;
+}
+.alert--success{
+  border-color: rgba(34,197,94,.35);
+  background: rgba(34,197,94,.08);
+  color: #0f7a3a;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--muted);
+}
+.pill--pending{ background: rgba(245,158,11,.10); border-color: rgba(245,158,11,.25); color:#8a5b00; }
+.pill--confirmed{ background: rgba(34,197,94,.10); border-color: rgba(34,197,94,.25); color:#0f7a3a; }
+.pill--cancelled{ background: rgba(255,77,79,.08); border-color: rgba(255,77,79,.20); color:#b42318; }
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+.item__meta{ display:grid; gap:6px; color: var(--muted); }
+.item__meta b{ color: var(--text); }
+.item__actions{ display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap; }
+
+.filters{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width: 900px){
+  .filters{ grid-template-columns: 1fr; }
+}
