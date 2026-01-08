@@ -8,6 +8,9 @@ const appointmentRoutes = require("./routes/appointmentRoutes");
 const healthRoutes = require("./routes/healthRoutes");
 const testRoutes = require("./routes/testRoutes");
 
+// ✅ NEW: AI routes
+const aiRoutes = require("./routes/aiRoutes");
+
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -19,11 +22,14 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/facilities", facilityRoutes);
 app.use("/api/doctors", doctorRoutes);
-app.use("/api/appointments", appointmentRoutes); // ✅ هذا هو اللي ناقص عندك
+app.use("/api/appointments", appointmentRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/test", testRoutes);
 
-// middlewares errors
+// ✅ NEW: AI endpoint
+app.use("/api/ai", aiRoutes);
+
+// middlewares errors (لازم يكونوا آخر حاجة)
 app.use(notFound);
 app.use(errorHandler);
 

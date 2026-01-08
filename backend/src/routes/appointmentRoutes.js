@@ -4,10 +4,11 @@ const { protect, authorize } = require("../middleware/authMiddleware");
 const {
   createAppointment,
   getMyAppointments,
+  getMyDoctorAppointments, // ✅ NEW
   getFacilityAppointments,
   updateAppointmentStatus,
   updateAppointmentStatusByDoctor,
-  getMyDoctorAgendaRange,     // ✅ only range agenda
+  getMyDoctorAgendaRange,
   getDoctorAvailability,
   getAvailabilityForPatient,
 } = require("../controllers/appointmentController");
@@ -34,31 +35,16 @@ router.patch("/:id/status", protect, authorize("admin_facility"), updateAppointm
 // DOCTOR
 // =========================================================
 
+// ✅ simple doctor upcoming/history (LIKE PATIENT)
+router.get("/doctor/my", protect, authorize("doctor"), getMyDoctorAppointments);
+
 // ✅ Agenda with range + status filter
-// مثال:
-// /api/appointments/doctor/agenda-range?from=2026-01-10&to=2026-01-17&status=active
-// status: active | pending | confirmed | cancelled  (و تنجم تزيد all إذا backend يدعمو)
-router.get(
-  "/doctor/agenda-range",
-  protect,
-  authorize("doctor"),
-  getMyDoctorAgendaRange
-);
+router.get("/doctor/agenda-range", protect, authorize("doctor"), getMyDoctorAgendaRange);
 
 // ✅ Doctor availability (doctor himself)
-router.get(
-  "/doctor/availability",
-  protect,
-  authorize("doctor"),
-  getDoctorAvailability
-);
+router.get("/doctor/availability", protect, authorize("doctor"), getDoctorAvailability);
 
 // ✅ Doctor confirm/cancel (private & facility)
-router.patch(
-  "/:id/doctor-status",
-  protect,
-  authorize("doctor"),
-  updateAppointmentStatusByDoctor
-);
+router.patch("/:id/doctor-status", protect, authorize("doctor"), updateAppointmentStatusByDoctor);
 
 module.exports = router;

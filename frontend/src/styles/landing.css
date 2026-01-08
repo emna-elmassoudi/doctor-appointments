@@ -1,0 +1,672 @@
+/* =========================
+   LANDING.CSS (FINAL CLEAN)
+   Keeps the same style as Login/Register
+   ========================= */
+
+:root{
+  --navH: 42px;
+}
+
+/* Card wrapper inside auth style */
+.landing .landing-card{
+  display: block;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Remove underline on all links (important because buttons are Links) */
+.landing a,
+.landing a:visited,
+.landing a:hover,
+.landing a:active{
+  text-decoration: none !important;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+.landing-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.35);
+  backdrop-filter: blur(10px);
+}
+
+/* 3 zones */
+.landing-brand{ flex: 0 0 auto; }
+.landing-links{
+  flex: 1 1 auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 18px;
+}
+.landing-actions{
+  flex: 0 0 auto;
+  display:flex;
+  align-items:center;
+  gap: 14px;
+}
+
+/* Logo badge stronger + same height as nav items */
+.landing .auth-badge{
+  height: var(--navH);
+  display:inline-flex;
+  align-items:center;
+  padding: 0 16px;
+  border-radius: 999px;
+  line-height: 1;
+
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(15,23,42,.14);
+  box-shadow: 0 10px 25px rgba(15,23,42,.10);
+
+  font-weight: 900;
+  color: rgba(15,23,42,.92);
+  letter-spacing: .3px;
+}
+
+.landing .landing-brand .auth-badge::before{
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-right: 10px;
+  background: radial-gradient(circle at 30% 30%, rgba(51,193,215,.95), rgba(106,116,215,.95));
+}
+
+/* Navbar links */
+.landing-link{
+  height: var(--navH);
+  display:inline-flex;
+  align-items:center;
+  padding: 0 10px;
+  border-radius: 12px;
+
+  color: rgba(15,23,42,.70);
+  font-weight: 700;
+  font-size: 13px;
+}
+.landing-link:hover{
+  background: rgba(15,23,42,.05);
+  color: rgba(15,23,42,.95);
+}
+
+/* Login link */
+.landing .auth-link{
+  height: var(--navH);
+  display:inline-flex;
+  align-items:center;
+  padding: 0 10px;
+  border-radius: 12px;
+
+  color: rgba(15,23,42,.75);
+  font-weight: 800;
+}
+.landing .auth-link:hover{
+  background: rgba(15,23,42,.06);
+  color: rgba(15,23,42,.95);
+}
+
+/* CTA button in navbar */
+.landing .landing-cta{
+  height: var(--navH);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 0 16px;
+  border-radius: 14px;
+}
+
+/* =========================
+   HERO
+   ========================= */
+.landing-hero{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 18px;
+  padding: 26px 22px 18px;
+
+  background:
+    radial-gradient(900px 500px at 15% 20%, rgba(106,116,215,.18) 0%, transparent 60%),
+    radial-gradient(700px 420px at 90% 30%, rgba(51,193,215,.14) 0%, transparent 55%);
+}
+
+/* Title/sub */
+.landing-title{
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: rgba(15,23,42,.95);
+  margin-top: 30px;
+}
+
+.landing-sub{
+  margin: 10px 0 0;
+  color: rgba(15,23,42,.65);
+  max-width: 520px;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+/* Hero buttons */
+.landing-heroActions{
+  display:flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* Make buttons auto width (not full width) */
+.landing-heroActions .auth-btn{
+  width: auto !important;
+  min-width: 0 !important;
+  display: inline-flex !important;
+
+  height: 44px;
+  padding: 0 16px !important;
+  border-radius: 14px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+/* Secondary button */
+.landing .auth-btn.auth-btn--light{
+  border-radius: 14px;
+}
+
+/* =========================
+   STATS
+   ========================= */
+.landing-stats{
+  display:flex;
+  gap: 22px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.landing-statNum{
+  font-weight: 900;
+  font-size: 22px;
+  color: rgba(15,23,42,.92);
+}
+
+.landing-statTxt{
+  font-size: 12.5px;
+  color: rgba(15,23,42,.60);
+  margin-top: 4px;
+}
+
+/* =========================
+   HERO IMAGE
+   ========================= */
+.landing-right{
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.landing-img{
+  width: min(420px, 100%);
+  height: auto;
+  filter: drop-shadow(0 22px 28px rgba(15,23,42,.18));
+  border-radius: 18px;
+}
+
+/* =========================
+   SECTIONS
+   ========================= */
+.landing-sections{
+  padding: 10px 22px 20px;
+}
+
+.landing-sectionTitle{
+  font-weight: 900;
+  color: rgba(15,23,42,.92);
+  margin: 10px 0 12px;
+}
+
+.landing-cards{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.landing-miniCard{
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+}
+
+.landing-miniTitle{
+  font-weight: 800;
+  color: rgba(15,23,42,.92);
+}
+
+.landing-miniText{
+  margin-top: 6px;
+  font-size: 13px;
+  color: rgba(15,23,42,.62);
+  line-height: 1.5;
+}
+
+/* Footer */
+.landing-footer{
+  margin-top: 16px;
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  color: rgba(15,23,42,.55);
+  font-size: 12.5px;
+}
+.landing-dot{ opacity:.6; }
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 900px){
+  .landing-hero{ grid-template-columns: 1fr; }
+  .landing-cards{ grid-template-columns: 1fr; }
+  .landing-links{ display:none; }
+  .landing-title{ font-size: 36px; }
+}
+
+/* Navbar Login as a small button (same size as Get Started) */
+.landing .landing-actions .auth-link{
+  height: var(--navH);
+  padding: 0 14px;
+  border-radius: 14px;
+  background: rgba(15,23,42,.06);
+  border: 1px solid rgba(15,23,42,.10);
+  font-weight: 800;
+  margin-top: 13px;
+}
+
+.landing .landing-actions .auth-link:hover{
+  background: rgba(15,23,42,.10);
+  border-color: rgba(15,23,42,.14);
+}
+.landing .landing-actions .auth-link{
+  background: transparent;
+  border: 1px solid rgba(15,23,42,.16);
+}
+.landing .landing-actions .auth-link:hover{
+  background: rgba(15,23,42,.05);
+}
+
+/* Make RDVDoctor pill match navbar buttons (Login / Get Started) */
+.landing .auth-badge{
+  height: var(--navH);
+  padding: 0 18px;
+  border-radius: 14px;            /* نفس روح الأزرار */
+  background: rgba(15,23,42,.04); /* خفيف */
+  border: 1px solid rgba(15,23,42,.12);
+  box-shadow: none;               /* باش تولّي clean */
+  font-weight: 900;
+  margin-top: 12px;
+}
+
+/* Dot داخل اللوغو يكون أصغر وأهدى */
+.landing .landing-brand .auth-badge::before{
+  width: 8px;
+  height: 8px;
+  margin-right: 10px;
+  opacity: .95;
+}
+/* Drop center nav links a bit lower */
+.landing-links{
+  margin-top: 14px;        /* جرّب 4-10 */
+  align-self: flex-start; /* يخليهم ينزلو وحدهم */
+}
+
+
+
+
+
+
+
+/* ===== Tighten space between hero actions and stats ===== */
+.landing-heroActions{
+  margin-top: 12px;   /* كان 18px */
+  margin-bottom: 6px; /* يعمل espace صغير قبل stats */
+  margin-top: 40px;
+}
+
+/* ===== Buttons: center text perfectly ===== */
+.landing-heroActions .auth-btn{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  line-height: 1 !important;
+  padding: 0 18px !important;
+}
+
+/* optional: make the primary button a bit less tall/wide */
+.landing-heroActions .auth-btn:first-child{
+  height: 42px;
+  padding: 0 18px !important;
+}
+
+/* ===== Stats: reduce gap and align nicely ===== */
+.landing-stats{
+  margin-top: 50px;  /* كان 18px */
+  gap: 1px;         /* كان 22px */
+  align-items: flex-start;
+}
+
+/* optional: make stats blocks look consistent */
+.landing-stat{
+  min-width: 140px;
+  
+}
+
+
+/* ===== FORCE: hero spacing + button centering ===== */
+
+/* 1) space between buttons and stats */
+.landing .landing-heroActions{
+  margin-top: 10px !important;
+  margin-bottom: 6px !important;
+  gap: 10px !important;
+}
+
+/* 2) force BOTH buttons to be real buttons (centered text) */
+.landing .landing-heroActions > a.auth-btn,
+.landing .landing-heroActions > a.auth-btn.auth-btn--light{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+
+  width: auto !important;       /* not full width */
+  min-width: 0 !important;
+  height: 42px !important;
+  padding: 0 18px !important;
+
+  line-height: 1 !important;
+  border-radius: 14px !important;
+}
+
+/* 3) stats closer + less gap */
+.landing .landing-stats{
+  margin-top: 20px !important;
+  gap: 14px !important;
+}
+
+/* 4) in case auth css makes links underlined */
+.landing .landing-heroActions > a{
+  text-decoration: none !important;
+}
+
+
+/* Smaller hero image */
+.landing-img{
+  width: min(320px, 90%) !important;  /* جرّب 300-360 */
+  transform: translateY(6px);         /* اختيارية: تهبط شوية */
+}
+
+/* keep it responsive on small screens */
+@media (max-width: 900px){
+  .landing-img{
+    width: min(280px, 85%) !important;
+    transform: none;
+  }
+}
+
+
+
+
+
+
+/* Keep stats in one row (40+ | 24/7 | Fast) */
+.landing-stats{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  margin-top: 10px !important;
+}
+
+.landing-stat{
+  min-width: 0 !important;
+}
+
+/* Responsive: on small screens turn into 2 cols */
+@media (max-width: 900px){
+  .landing-stats{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 520px){
+  .landing-stats{
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* =========================
+   Glassmorphism buttons (Landing only)
+   ========================= */
+
+/* Base glass for all buttons/links that look like buttons */
+.landing a.auth-btn,
+.landing .landing-actions .auth-link{
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.55) !important;
+  box-shadow:
+    0 12px 26px rgba(15,23,42,.12),
+    inset 0 1px 0 rgba(255,255,255,.65);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+
+/* Primary button (Book / Get Started) */
+.landing a.auth-btn:not(.auth-btn--light){
+  background: linear-gradient(135deg, rgba(106,116,215,.90), rgba(51,193,215,.35)) !important;
+}
+
+/* Light/secondary button (Find a doctor / Login pill) */
+.landing a.auth-btn.auth-btn--light,
+.landing .landing-actions .auth-link{
+  background: rgba(255,255,255,.35) !important;
+  color: rgba(15,23,42,.85) !important;
+}
+
+/* Hover / active */
+.landing a.auth-btn:hover,
+.landing .landing-actions .auth-link:hover{
+  transform: translateY(-1px);
+  box-shadow:
+    0 16px 34px rgba(15,23,42,.16),
+    inset 0 1px 0 rgba(255,255,255,.75);
+  border-color: rgba(255,255,255,.75) !important;
+}
+
+.landing a.auth-btn:active,
+.landing .landing-actions .auth-link:active{
+  transform: translateY(0);
+  box-shadow:
+    0 10px 22px rgba(15,23,42,.12),
+    inset 0 1px 0 rgba(255,255,255,.55);
+}
+/* ===== Public Pages (HowItWorks / Services / Contact) - LIGHT like your app ===== */
+
+.lp{
+  min-height: calc(100vh - 64px);
+  padding: 28px 16px 64px;
+  background:
+    radial-gradient(1100px 650px at 20% 20%, rgba(99,102,241,.18), transparent 60%),
+    radial-gradient(900px 600px at 80% 10%, rgba(56,189,248,.18), transparent 55%),
+    radial-gradient(900px 700px at 50% 95%, rgba(34,211,238,.12), transparent 55%),
+    #c9ceda; /* نفس روح الخلفية اللي عندك */
+  color: #0f172a;
+}
+
+.lp__container{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.lp__hero{
+  margin-bottom: 18px;
+  padding: 22px 20px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(15,23,42,.10);
+  box-shadow: 0 20px 55px rgba(15,23,42,.12);
+  backdrop-filter: blur(12px);
+}
+
+.lp__badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(99,102,241,.10);
+  border: 1px solid rgba(99,102,241,.20);
+  color: rgba(15,23,42,.88);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: .2px;
+}
+
+.lp__title{
+  margin: 12px 0 8px;
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.12;
+  color: #0f172a;
+}
+
+.lp__subtitle{
+  margin: 0;
+  max-width: 760px;
+  color: rgba(15,23,42,.70);
+  line-height: 1.6;
+}
+
+.lp__grid{
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lp__grid--2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px){
+  .lp__grid{ grid-template-columns: 1fr; }
+  .lp__grid--2{ grid-template-columns: 1fr; }
+}
+
+.lp__card{
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.74);
+  border: 1px solid rgba(15,23,42,.10);
+  box-shadow: 0 16px 40px rgba(15,23,42,.10);
+  backdrop-filter: blur(10px);
+}
+
+.lp__icon{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #0f172a;
+  background: rgba(56,189,248,.18);
+  border: 1px solid rgba(56,189,248,.28);
+  margin-bottom: 10px;
+}
+
+.lp__h3{
+  margin: 6px 0 8px;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.lp__p{
+  margin: 0;
+  color: rgba(15,23,42,.72);
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+.lp__callout{
+  margin-top: 14px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(99,102,241,.12), rgba(56,189,248,.12));
+  border: 1px solid rgba(15,23,42,.10);
+  box-shadow: 0 16px 45px rgba(15,23,42,.10);
+}
+
+.lp__divider{
+  height: 1px;
+  background: rgba(15,23,42,.10);
+  margin: 14px 0;
+}
+
+/* Contact form */
+.lp__label{
+  display: block;
+  margin: 10px 0 6px;
+  font-size: 12px;
+  color: rgba(15,23,42,.70);
+  font-weight: 700;
+}
+
+.lp__input, .lp__textarea{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,.12);
+  background: rgba(255,255,255,.85);
+  color: #0f172a;
+  outline: none;
+}
+
+.lp__input:focus, .lp__textarea:focus{
+  border-color: rgba(99,102,241,.35);
+  box-shadow: 0 0 0 4px rgba(99,102,241,.12);
+}
+
+.lp__btn{
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(99,102,241,.25);
+  background: linear-gradient(90deg, rgba(99,102,241,.22), rgba(56,189,248,.18));
+  color: #0f172a;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.lp__btn:hover{
+  filter: brightness(1.03);
+}
+
+.lp__toast{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(34,211,238,.16);
+  border: 1px solid rgba(34,211,238,.22);
+  color: rgba(15,23,42,.90);
+  font-size: 13px;
+  font-weight: 700;
+}

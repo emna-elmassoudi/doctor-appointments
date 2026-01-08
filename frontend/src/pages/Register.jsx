@@ -1,21 +1,21 @@
 // frontend/src/pages/Register.jsx
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser, loginUser } from "../api/auth";
 import { getFacilities } from "../api/facilities";
 import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
   const nav = useNavigate();
-  const { setAuth } = useAuth();
+  const { login } = useAuth(); // ✅ IMPORTANT: AuthContext عندك فيه login مش setAuth
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [role, setRole] = useState("patient"); // patient | doctor | admin_facility
-  const [specialty, setSpecialty] = useState("General"); // for doctor
-  const [facilityId, setFacilityId] = useState(""); // for admin_facility (required) + doctor (optional)
+  const [specialty, setSpecialty] = useState("General"); // doctor only
+  const [facilityId, setFacilityId] = useState(""); // admin_facility required, doctor optional
 
   const [facilities, setFacilities] = useState([]);
 
@@ -40,15 +40,12 @@ export default function Register() {
     if (role === "patient") {
       setFacilityId("");
       setSpecialty("General");
-    }
-
-    if (role === "admin_facility") {
+    } else if (role === "admin_facility") {
       setSpecialty("General");
-    }
-
-    if (role === "doctor") {
-      // facility optional for doctor
-      if (!specialty) setSpecialty("General");
+      // facility required => keep user selection
+    } else if (role === "doctor") {
+      setSpecialty((s) => (s?.trim() ? s : "General"));
+      // facility optional
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [role]);
@@ -70,23 +67,17 @@ export default function Register() {
       return setErr("Please choose a facility");
     }
 
-    const payload = {
-      fullName: name,
-      email: mail,
-      password,
-      role,
-    };
+    const payload = { fullName: name, email: mail, password, role };
 
     // ✅ doctor extras
     if (role === "doctor") {
       payload.specialty = specialty?.trim() || "General";
-      // facility optional (private doctor => empty)
-      if (facilityId) payload.facilityId = facilityId;
+      if (facilityId) payload.facilityId = facilityId; // optional
     }
 
     // ✅ admin facility needs facilityId
     if (role === "admin_facility") {
-      payload.facilityId = facilityId;
+      payload.facilityId = facilityId; // required
     }
 
     setLoading(true);
@@ -96,8 +87,11 @@ export default function Register() {
 
       // 2) auto login
       const { data } = await loginUser({ email: mail, password });
-      setAuth(data);
 
+      // ✅ store auth using AuthContext method
+      login(data);
+
+      // role can be in root or inside user
       const r = data?.user?.role || data?.role;
 
       if (r === "patient") nav("/patient/appointments", { replace: true });
@@ -105,79 +99,145 @@ export default function Register() {
       else if (r === "doctor") nav("/doctor/appointments", { replace: true });
       else nav("/", { replace: true });
     } catch (e2) {
-      setErr(e2?.response?.data?.message || "Register failed");
+      console.log("REGISTER ERROR:", e2);
+
+      const msg =
+        e2?.response?.data?.message ||
+        e2?.response?.data?.error ||
+        e2?.message ||
+        "Register failed";
+
+      setErr(msg);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ maxWidth: 520, margin: "30px auto" }}>
-      <h2>Register</h2>
+    <div className="auth-page">
+      <div className="auth-card">
+        {/* LEFT */}
+        <div className="auth-left">
+          <div className="auth-left__top">
+            <div className="auth-badge">RDVDoctor</div>
+          </div>
 
-      <form onSubmit={onSubmit} style={{ display: "grid", gap: 10 }}>
-        <label>
-          Full name
-          <input value={fullName} onChange={(e) => setFullName(e.target.value)} />
-        </label>
+          <div className="auth-left__content">
+            <h2>We at RDVDoctor</h2>
+            <p>
+              are always fully focused on helping you manage your medical appointments easily and
+              securely.
+            </p>
 
-        <label>
-          Email
-          <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" />
-        </label>
+            <div className="auth-illu">
+              <img
+                src="/auth-illustration.png"
+                alt="Medical illustration"
+                className="auth-illu__img"
+              />
+            </div>
+          </div>
+        </div>
 
-        <label>
-          Password (min 6)
-          <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
-        </label>
+        {/* RIGHT */}
+        <div className="auth-right">
+          <h2 className="auth-title">Create Account</h2>
 
-        <label>
-          Role
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="patient">patient</option>
-            <option value="doctor">doctor</option>
-            <option value="admin_facility">admin_facility</option>
-          </select>
-        </label>
+          {err && <div className="auth-alert">{err}</div>}
 
-        {/* ✅ Doctor specialty */}
-        {role === "doctor" && (
-          <label>
-            Specialty
+          <form onSubmit={onSubmit}>
+            <label className="auth-label">Full name</label>
             <input
-              value={specialty}
-              onChange={(e) => setSpecialty(e.target.value)}
-              placeholder="General, Cardiology..."
+              className="auth-input"
+              placeholder="Full name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              autoComplete="name"
+              required
             />
-          </label>
-        )}
 
-        {/* ✅ Facility selector:
-            - admin_facility: required
-            - doctor: optional (private doctor => keep empty)
-        */}
-        {(role === "admin_facility" || role === "doctor") && (
-          <label>
-            Facility {role === "admin_facility" ? "(required)" : "(optional for private doctor)"}
-            <select value={facilityId} onChange={(e) => setFacilityId(e.target.value)}>
-              <option value="">
-                {role === "admin_facility" ? "-- choose facility --" : "-- none (private doctor) --"}
-              </option>
-              {facilities.map((f) => (
-                <option key={f._id} value={f._id}>
-                  {f.name}
-                </option>
-              ))}
+            <label className="auth-label">Email</label>
+            <input
+              className="auth-input"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              autoComplete="email"
+              required
+            />
+
+            <label className="auth-label">Password</label>
+            <input
+              className="auth-input"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              autoComplete="new-password"
+              required
+            />
+
+            <label className="auth-label">Role</label>
+            <select className="auth-input" value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="admin_facility">Admin Facility</option>
             </select>
-          </label>
-        )}
 
-        <button disabled={loading} type="submit">
-          {loading ? "Creating..." : "Create account"}
-        </button>
+            {/* Doctor specialty */}
+            {role === "doctor" && (
+              <>
+                <label className="auth-label">Specialty</label>
+                <input
+                  className="auth-input"
+                  value={specialty}
+                  onChange={(e) => setSpecialty(e.target.value)}
+                  placeholder="General, Cardiology..."
+                />
+              </>
+            )}
 
-        {err && <p style={{ color: "crimson" }}>{err}</p>}
-      </form>
+            {/* Facility selector */}
+            {(role === "admin_facility" || role === "doctor") && (
+              <>
+                <label className="auth-label">
+                  Facility{" "}
+                  <span className="auth-label__hint">
+                    {role === "admin_facility" ? "(required)" : "(optional)"}
+                  </span>
+                </label>
+
+                <select
+                  className="auth-input"
+                  value={facilityId}
+                  onChange={(e) => setFacilityId(e.target.value)}
+                >
+                  <option value="">
+                    {role === "admin_facility"
+                      ? "-- choose facility --"
+                      : "-- none (private doctor) --"}
+                  </option>
+
+                  {facilities.map((f) => (
+                    <option key={f._id} value={f._id}>
+                      {f.name}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
+
+            <button className="auth-btn" disabled={loading} type="submit">
+              {loading ? "Creating..." : "Create Account"}
+            </button>
+
+            <div className="auth-footer">
+              Already have an account? <Link to="/login">Log in</Link>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

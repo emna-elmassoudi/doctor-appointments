@@ -81,6 +81,50 @@ const getMyAppointments = async (req, res, next) => {
 
 /**
  * =========================================================
+ * ✅ GET MY APPOINTMENTS (doctor)
+ * GET /api/appointments/doctor/my
+ * =========================================================
+ */
+const getMyDoctorAppointments = async (req, res, next) => {
+  try {
+    const now = new Date();
+
+    // ✅ doctor account must be linked to a Doctor profile
+    const doctor = await Doctor.findOne({ user: req.user._id });
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor profile not linked" });
+    }
+
+    // facility doctor => only his facility, private doctor => facility null
+    const facilityFilter = doctor.facilityId ? doctor.facilityId : null;
+
+    const upcoming = await Appointment.find({
+      doctor: doctor._id,
+      facility: facilityFilter,
+      status: { $in: ["pending", "confirmed"] },
+      date: { $gte: now },
+    })
+      .populate("patient", "fullName email")
+      .populate("facility", "name")
+      .sort({ date: 1 });
+
+    const history = await Appointment.find({
+      doctor: doctor._id,
+      facility: facilityFilter,
+      $or: [{ status: "cancelled" }, { date: { $lt: now } }],
+    })
+      .populate("patient", "fullName email")
+      .populate("facility", "name")
+      .sort({ date: -1 });
+
+    return res.json({ upcoming, history });
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * =========================================================
  * GET FACILITY APPOINTMENTS (admin_facility)
  * GET /api/appointments/facility
  * =========================================================
@@ -195,7 +239,6 @@ const getMyDoctorAgendaRange = async (req, res, next) => {
       return res.status(400).json({ message: "from and to are required" });
     }
 
-    // ✅ safer parsing: force day range local
     const start = new Date(`${from}T00:00:00`);
     const end = new Date(`${to}T23:59:59.999`);
 
@@ -282,7 +325,6 @@ const getAvailabilityForPatient = async (req, res, next) => {
       return res.status(400).json({ message: "date must be in format YYYY-MM-DD" });
     }
 
-    // ✅ validate doctor exists
     const doctor = await Doctor.findById(doctorId);
     if (!doctor) return res.status(404).json({ message: "Doctor not found" });
 
@@ -294,7 +336,7 @@ const getAvailabilityForPatient = async (req, res, next) => {
 
 /**
  * =========================================================
- * AVAILABILITY HELPER (✅ FIXED: LOCAL TIME)
+ * AVAILABILITY HELPER (LOCAL TIME)
  * Returns: { available: ["09:00", ...], booked: [...] }
  * =========================================================
  */
@@ -303,7 +345,6 @@ const buildAvailabilityResponse = async (res, doctorObjectId, dateYMD) => {
   const workStart = "09:00";
   const workEnd = "17:00";
 
-  // ✅ local date builder
   const buildLocalDate = (ymd, hhmm) => {
     const [Y, M, D] = ymd.split("-").map(Number);
     const [h, m] = hhmm.split(":").map(Number);
@@ -319,7 +360,6 @@ const buildAvailabilityResponse = async (res, doctorObjectId, dateYMD) => {
     date: { $gte: startDay, $lte: endDay },
   }).select("date");
 
-  // booked (LOCAL)
   const booked = new Set(
     appointments.map((a) => {
       const d = new Date(a.date);
@@ -329,7 +369,6 @@ const buildAvailabilityResponse = async (res, doctorObjectId, dateYMD) => {
     })
   );
 
-  // generate slots (LOCAL)
   const slots = [];
   let cursor = buildLocalDate(dateYMD, workStart);
   const end = buildLocalDate(dateYMD, workEnd);
@@ -357,6 +396,7 @@ const buildAvailabilityResponse = async (res, doctorObjectId, dateYMD) => {
 module.exports = {
   createAppointment,
   getMyAppointments,
+  getMyDoctorAppointments, // ✅ NEW
   getFacilityAppointments,
   updateAppointmentStatus,
   updateAppointmentStatusByDoctor,

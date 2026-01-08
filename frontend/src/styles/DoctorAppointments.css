@@ -1,0 +1,243 @@
+/* frontend/src/styles/DoctorAppointments.css */
+
+.doctorPage{
+  min-height: calc(100vh - 70px);
+  padding: 26px 16px;
+  background:
+    radial-gradient(900px 500px at 15% 20%, rgba(106,116,215,.12) 0%, transparent 60%),
+    radial-gradient(700px 420px at 90% 30%, rgba(51,193,215,.10) 0%, transparent 55%);
+}
+
+.doctorContainer{
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.doctorTopbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.doctorTitle{
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -.02em;
+  color: rgba(15,23,42,.92);
+}
+
+.doctorToolbar{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+
+/* glass panel */
+.doctorPanel{
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.55);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 18px 40px rgba(15,23,42,.12);
+}
+
+.doctorSectionTitle{
+  margin: 10px 0 10px;
+  font-size: 18px;
+  color: rgba(15,23,42,.90);
+  font-weight: 900;
+}
+
+.doctorEmpty{
+  color: rgba(15,23,42,.60);
+  font-weight: 700;
+}
+
+/* list + cards */
+.doctorList{
+  display:grid;
+  gap: 10px;
+}
+
+.doctorItem{
+  background: rgba(255,255,255,.38);
+  border: 1px solid rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.doctorKV{
+  display:grid;
+  grid-template-columns: 120px 1fr;
+  gap: 6px 12px;
+  align-items:center;
+}
+
+.doctorK{
+  font-weight: 900;
+  color: rgba(15,23,42,.60);
+  font-size: 12.5px;
+}
+
+/* status pill */
+.doctorStatus{
+  display:inline-flex;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 12px;
+  border: 1px solid rgba(15,23,42,.10);
+}
+.doctorStatus.pending{
+  background: rgba(251,191,36,.14);
+  color: rgba(161,98,7,.95);
+  border-color: rgba(251,191,36,.22);
+}
+.doctorStatus.confirmed{
+  background: rgba(16,185,129,.12);
+  color: rgba(5,150,105,.95);
+  border-color: rgba(16,185,129,.20);
+}
+.doctorStatus.cancelled{
+  background: rgba(220,38,38,.10);
+  color: rgba(220,38,38,.92);
+  border-color: rgba(220,38,38,.18);
+}
+
+/* messages */
+.doctorAlert{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(220,38,38,.20);
+  background: rgba(220,38,38,.08);
+  color: rgba(220,38,38,.92);
+  font-weight: 800;
+}
+.doctorSuccess{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(16,185,129,.18);
+  background: rgba(16,185,129,.08);
+  color: rgba(16,185,129,.92);
+  font-weight: 900;
+}
+
+/* buttons (glass) */
+.doctorBtn{
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.45);
+  background: rgba(255,255,255,.35);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.10);
+  font-weight: 900;
+  cursor: pointer;
+  color: rgba(15,23,42,.82);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.doctorBtn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.50);
+  box-shadow: 0 16px 34px rgba(15,23,42,.14);
+}
+
+.doctorBtn:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.doctorBtnPrimary{
+  border: 1px solid rgba(99,102,241,.30);
+  background: linear-gradient(90deg, rgba(99,102,241,.85), rgba(51,193,215,.55));
+  color: #fff;
+}
+
+.doctorBtnPrimary:hover{
+  background: linear-gradient(90deg, rgba(99,102,241,.92), rgba(51,193,215,.62));
+}
+
+.doctorActions{
+  display:flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* responsive */
+@media (max-width: 720px){
+  .doctorTitle{ font-size: 28px; }
+  .doctorKV{ grid-template-columns: 1fr; }
+}
+/* ===== DoctorAppointments buttons: same size ===== */
+.page .toolbar .btn,
+.page .item .btn{
+  min-height: 42px;
+  padding: 10px 16px;
+  min-width: 120px;           /* نفس العرض */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 14px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* لو عندك زرّ فيها "..." باش ما تصغّرش */
+.page .item .btn:disabled{
+  opacity: .75;
+}
+
+/* optional: خلّي Cancel نفس الستايل لكن مختلف لون */
+.page .item .btn:not(.btn-primary){
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+.page .item .btn.btn-danger{
+  background: rgba(255, 71, 87, .12);
+  border: 1px solid rgba(255, 71, 87, .35);
+}
+.doctorBtn{
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.45);
+  background: rgba(255,255,255,.35);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.10);
+  font-weight: 900;
+  cursor: pointer;
+  color: rgba(15,23,42,.82);
+}
+/* CONFIRM = GREEN */
+.doctorBtnPrimary{
+  border: 1px solid rgba(16,185,129,.30);
+  background: rgba(16,185,129,.14);
+  color: rgba(5,150,105,.95);
+}
+
+.doctorBtnPrimary:hover{
+  background: rgba(16,185,129,.20);
+}
+/* CANCEL = RED */
+.doctorBtnDanger{
+  border: 1px solid rgba(220,38,38,.30);
+  background: rgba(220,38,38,.12);
+  color: rgba(220,38,38,.95);
+}
+
+.doctorBtnDanger:hover{
+  background: rgba(220,38,38,.18);
+}

@@ -1,0 +1,377 @@
+.auth-page{
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 90px;
+  justify-content: center;
+  background: #bfc4d4;
+}
+
+.auth-card{
+  width: 900px;
+  max-width: 95%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 22px 55px rgba(0,0,0,.18);
+}
+
+
+/* LEFT */
+.auth-left{
+  background: linear-gradient(160deg, #c7d2ff, #dbe2ff);
+  padding: 40px;
+  color: #24306e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.auth-left h2{
+  font-size: 26px;
+  margin: 0;
+}
+
+.auth-left p{
+  opacity: .85;
+  line-height: 1.5;
+}
+
+/* RIGHT */
+.auth-right{
+  padding: 40px;
+}
+
+.auth-title{
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.auth-input{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 14px;
+}
+
+.auth-btn{
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #6b78d6;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-footer{
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.auth-label{ display:block; font-size: 13px; color:#444; margin: 10px 0 6px; }
+.auth-label__hint{ color:#777; font-weight:600; }
+
+.auth-alert{
+  background: #ffe7ea;
+  color: #9b1c31;
+  border: 1px solid #ffc6cf;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.auth-badge{
+  display:inline-flex;
+  align-items:center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(0,0,0,.06);
+  font-weight: 800;
+  width: fit-content;
+}
+
+.auth-note{
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.auth-note__title{ font-weight: 800; margin-bottom: 6px; }
+.auth-note__text{ opacity:.85; line-height:1.4; }
+
+/* make the auth card more like the template */
+.auth-card{
+  width: 980px;
+  grid-template-columns: 1.15fr .85fr; /* left أكبر شوية */
+}
+
+/* LEFT */
+.auth-left{
+  padding: 46px;
+  background: linear-gradient(160deg, #cfd7ff, #e6eaff);
+}
+
+.auth-left h2{
+  font-size: 34px;
+  margin: 10px 0 6px;
+  color:#2a2f66;
+}
+
+.auth-left p{
+  max-width: 360px;
+  font-size: 15px;
+  color: rgba(42,47,102,.78);
+}
+
+/* image nicer */
+.auth-illu{
+  margin-top: 28px;
+  justify-content: center;
+}
+
+.auth-illu__img{
+  max-width: 440px;     /* أكبر شوية */
+  transform: translateY(-10px); /* نطلعها */
+  filter: drop-shadow(0 24px 38px rgba(0,0,0,.18));
+}
+
+/* RIGHT */
+.auth-right{
+  padding: 48px 50px;
+}
+
+.auth-title{
+  font-size: 28px;
+  margin: 0 0 18px;
+}
+
+.auth-label{
+  margin: 14px 0 6px;
+  font-weight: 600;
+  color:#444;
+}
+
+.auth-input{
+  border-radius: 12px;
+  padding: 13px 14px;
+  border: 1px solid #e1e1e1;
+}
+
+.auth-input:focus{
+  outline: none;
+  border-color: #6b78d6;
+  box-shadow: 0 0 0 3px rgba(107,120,214,.18);
+}
+
+.auth-btn{
+  margin-top: 12px;
+  border-radius: 12px;
+  padding: 13px;
+}
+
+.auth-footer{
+  margin-top: 18px;
+  color:#444;
+}
+
+.auth-right{
+  position: relative;
+  z-index: 2;
+}
+
+.auth-left{
+  pointer-events: none; /* الصورة ما تعرقلش */
+}
+
+/* ✨ animations */
+.auth-anim{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.auth-anim.is-in{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* hover polish */
+.auth-input, .auth-btn{
+  transition: box-shadow .2s ease, transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.auth-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(107,120,214,.25);
+}
+
+/* password row + link */
+.auth-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.auth-link{
+  border: none;
+  background: transparent;
+  color: #6b78d6;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+.auth-link:hover{ text-decoration: underline; }
+
+/* password input + eye */
+.auth-pass{
+  position: relative;
+  
+}
+
+
+.auth-eye{
+  position:absolute;
+  right: 10px;
+  top: 40%;
+  transform: translateY(-50%);
+  
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.auth-eye:hover{
+  border-color: #cfd3ff;
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+}
+
+/* 🔐 modal */
+.auth-modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 16px;
+  z-index: 9999;
+}
+
+.auth-modal__card{
+  width: 420px;
+  max-width: 95%;
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.25);
+}
+
+.auth-modal__title{
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color:#222;
+}
+
+.auth-modal__text{
+  color:#444;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.auth-modal__actions{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.auth-btn--light{
+  width: auto;
+  padding: 10px 14px;
+  background: #eef1ff;
+  color: #2a2f66;
+}
+.auth-btn--light:hover{
+  background: #e6eaff;
+}
+
+.auth-eye{ right: -90px; }
+.auth-input--pass{ padding-right: 18px; }
+
+
+
+
+
+
+
+
+/* =========================
+   Glassmorphism (AUTH only)
+   ========================= */
+.auth-page .auth-btn,
+.auth-page .auth-link{
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.55) !important;
+  box-shadow:
+    0 14px 30px rgba(15,23,42,.14),
+    inset 0 1px 0 rgba(255,255,255,.65);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  text-decoration: none !important;
+}
+
+/* Primary button (Login / Create Account) */
+.auth-page .auth-btn{
+  background: linear-gradient(135deg, rgba(106,116,215,.92), rgba(51,193,215,.28)) !important;
+}
+
+/* Light / secondary button (Close modal / secondary actions) */
+.auth-page .auth-btn.auth-btn--light{
+  background: rgba(255,255,255,.35) !important;
+  color: rgba(15,23,42,.88) !important;
+}
+
+/* Hover / Active */
+.auth-page .auth-btn:hover,
+.auth-page .auth-link:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.75) !important;
+  box-shadow:
+    0 18px 38px rgba(15,23,42,.18),
+    inset 0 1px 0 rgba(255,255,255,.75);
+}
+
+.auth-page .auth-btn:active,
+.auth-page .auth-link:active{
+  transform: translateY(0);
+  box-shadow:
+    0 12px 26px rgba(15,23,42,.14),
+    inset 0 1px 0 rgba(255,255,255,.55);
+}
+
+
+
+/* Put "Forgot password?" more to the right */
+.auth-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* label left, link right */
+  gap: 12px;
+}
+
+.auth-row .auth-link{
+  margin-left: auto;         /* pushes it to the far right */
+  padding-right: 6px;        /* extra nudge */
+  transform: translateX(35px);/* move a bit more to the right */
+}
+

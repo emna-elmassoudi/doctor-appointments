@@ -1,0 +1,201 @@
+/* frontend/src/styles/AdminFacilityAppointments.css */
+
+/* ===== page ===== */
+.adminPage{
+  min-height: calc(100vh - 70px);
+  padding: 26px 16px;
+  background:
+    radial-gradient(900px 500px at 15% 20%, rgba(106,116,215,.12) 0%, transparent 60%),
+    radial-gradient(700px 420px at 90% 30%, rgba(51,193,215,.10) 0%, transparent 55%);
+}
+
+.adminContainer{
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.adminTopbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.adminTitle{
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -.02em;
+  color: rgba(15,23,42,.92);
+}
+
+.adminToolbar{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+
+/* ===== glass panel ===== */
+.adminPanel{
+  background: rgba(255,255,255,.45);
+  border: 1px solid rgba(255,255,255,.55);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 18px 40px rgba(15,23,42,.12);
+}
+
+.adminSectionTitle{
+  margin: 10px 0 10px;
+  font-size: 18px;
+  color: rgba(15,23,42,.90);
+  font-weight: 900;
+}
+
+.adminEmpty{
+  color: rgba(15,23,42,.60);
+  font-weight: 700;
+}
+
+/* ===== list + cards ===== */
+.adminList{
+  display:grid;
+  gap: 10px;
+}
+
+.adminItem{
+  background: rgba(255,255,255,.38);
+  border: 1px solid rgba(255,255,255,.55);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.adminKV{
+  display:grid;
+  grid-template-columns: 120px 1fr;
+  gap: 6px 12px;
+  align-items:center;
+}
+
+.adminK{
+  font-weight: 900;
+  color: rgba(15,23,42,.60);
+  font-size: 12.5px;
+}
+
+/* ===== status pill ===== */
+.adminStatus{
+  display:inline-flex;
+  width: fit-content;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 12px;
+  border: 1px solid rgba(15,23,42,.10);
+}
+.adminStatus.pending{
+  background: rgba(251,191,36,.14);
+  color: rgba(161,98,7,.95);
+  border-color: rgba(251,191,36,.22);
+}
+.adminStatus.confirmed{
+  background: rgba(16,185,129,.12);
+  color: rgba(5,150,105,.95);
+  border-color: rgba(16,185,129,.20);
+}
+.adminStatus.cancelled{
+  background: rgba(220,38,38,.10);
+  color: rgba(220,38,38,.92);
+  border-color: rgba(220,38,38,.18);
+}
+
+/* ===== messages ===== */
+.adminAlert{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(220,38,38,.20);
+  background: rgba(220,38,38,.08);
+  color: rgba(220,38,38,.92);
+  font-weight: 800;
+}
+
+.adminSuccess{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(16,185,129,.18);
+  background: rgba(16,185,129,.08);
+  color: rgba(16,185,129,.92);
+  font-weight: 900;
+}
+
+/* ===== buttons (glass) ===== */
+.adminBtn{
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.45);
+  background: rgba(255,255,255,.35);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 28px rgba(15,23,42,.10);
+  font-weight: 900;
+  cursor: pointer;
+  color: rgba(15,23,42,.82);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.adminBtn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.50);
+  box-shadow: 0 16px 34px rgba(15,23,42,.14);
+}
+
+.adminBtn:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* primary */
+.adminBtnPrimary{
+  border: 1px solid rgba(99,102,241,.30);
+  background: linear-gradient(90deg, rgba(99,102,241,.85), rgba(51,193,215,.55));
+  color: #fff;
+}
+
+.adminBtnPrimary:hover{
+  background: linear-gradient(90deg, rgba(99,102,241,.92), rgba(51,193,215,.62));
+}
+
+/* danger (cancel) — نفس روح doctorStatus.cancelled */
+.adminBtnDanger{
+  border: 1px solid rgba(220,38,38,.22);
+  background: rgba(220,38,38,.10);
+  color: rgba(220,38,38,.92);
+}
+
+.adminBtnDanger:hover{
+  background: rgba(220,38,38,.14);
+}
+
+/* actions row */
+.adminActions{
+  display:flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* force SAME SIZE for confirm/cancel */
+.adminActions .adminBtn{
+  min-width: 120px;
+  justify-content: center;
+}
+
+/* responsive */
+@media (max-width: 720px){
+  .adminTitle{ font-size: 28px; }
+  .adminKV{ grid-template-columns: 1fr; }
+}
